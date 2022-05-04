@@ -1,0 +1,15 @@
+name: MainPlugin
+version: '${project.version}'
+main: me.topilom.mainplugin.MainPlugin
+api-version: 1.13
+commands:
+  upgrade: {}
+  eco: {}
+  menu: {}
+  rebirth: {}
+  locations: {}
+  level: {}
+  setvalue: {}
+  sellall: {}
+  bp: {}
+  bits: {}
