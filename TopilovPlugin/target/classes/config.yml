@@ -1,0 +1,13 @@
+reload:
+  message:
+    - "&cПлагин перезагружен"
+    - "&e да"
+blocks:
+  IRON_BLOCK:
+      - DIAMOND
+      - GOLD_INGOT
+      - IRON_INGOT
+  DIAMOND_BLOCK:
+      - GRASS_BLOCK
+      - EMERALD
+      - IRON_ORE
