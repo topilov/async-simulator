@@ -1,0 +1,15 @@
+name: MinerSimulator
+version: '1.0'
+main: me.topilov.App
+api-version: 1.13
+commands:
+  eco: {}
+  menu: {}
+  rebirth: {}
+  locations: {}
+  level: {}
+  setvalue: {}
+  sellall: {}
+  bp: {}
+  bits: {}
+  upgrade: {}
