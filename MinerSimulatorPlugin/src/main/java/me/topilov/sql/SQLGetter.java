@@ -3,7 +3,6 @@ package me.topilov.sql;
 import me.topilov.App;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +14,7 @@ public class SQLGetter {
         PreparedStatement ps;
         try {
             ps = App.getInstance().SQL.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS players "
-                    + "(name VARCHAR(100),uuid VARCHAR(100),rebirth INT(100) NOT NULL,level INT(100) NOT NULL DEFAULT '1',bits INT(100) NOT NULL,blocksBP INT(100) NOT NULL,backpack INT(100) NOT NULL DEFAULT '50',blocks INT(100) NOT NULL,artefacts INT(100) NOT NULL,exp INT(100) NOT NULL,boosterBalance INT(100) NOT NULL DEFAULT '1',boosterEXP INT(100) NOT NULL DEFAULT '1',boosterBlocks INT(100) NOT NULL DEFAULT '1',boosterArtefacts INT(100) NOT NULL DEFAULT '1', PRIMARY KEY (NAME))");
+                    + "(name VARCHAR(100),uuid VARCHAR(100),playerGroup TEXT(100) NOT NULL DEFAULT 'USER',rebirth INT(100) NOT NULL,level INT(100) NOT NULL DEFAULT '1',bits INT(100) NOT NULL,blocksBP INT(100) NOT NULL,backpack INT(100) NOT NULL DEFAULT '50',blocks INT(100) NOT NULL,artefacts INT(100) NOT NULL,exp INT(100) NOT NULL,boosterBalance INT(100) NOT NULL DEFAULT '1',boosterEXP INT(100) NOT NULL DEFAULT '1',boosterBlocks INT(100) NOT NULL DEFAULT '1',boosterArtefacts INT(100) NOT NULL DEFAULT '1', autosell INT(100) NOT NULL DEFAULT '0', pickaxe INT(100) NOT NULL DEFAULT '0', PRIMARY KEY (NAME))");
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1149,6 +1148,78 @@ public class SQLGetter {
             if (rs.next()) {
                 boosterArtefacts = rs.getInt("boosterArtefacts");
                 return boosterArtefacts;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void setAutosell(UUID uuid, int autosell) {
+        try {
+            PreparedStatement ps = App.getInstance().SQL.getConnection().prepareStatement("UPDATE players SET autosell=? WHERE uuid=?");
+            ps.setInt(1, (autosell));
+            ps.setString(2, uuid.toString());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getAutosell(UUID uuid) {
+        try {
+            PreparedStatement ps = App.getInstance().SQL.getConnection().prepareStatement("SELECT autosell FROM players WHERE uuid=?");
+            ps.setString(1, uuid.toString());
+            ResultSet rs = ps.executeQuery();
+
+            int autosell = 1;
+            if (rs.next()) {
+                autosell = rs.getInt("autosell");
+                return autosell;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public String[] getTopExp(int amount){
+        String[] array = new String[amount];
+        int counter = 0;
+        try{
+            PreparedStatement ps = App.getInstance().SQL.getConnection().prepareStatement("SELECT * FROM players ORDER exp BY DESC LIMIT " + amount);
+            ResultSet rs = ps.executeQuery();
+            rs.last();
+            if(rs.getRow() != 0){
+                rs.first();
+                array[counter] = rs.getString("name") + "." + rs.getInt("exp");
+                counter++;
+            }
+        }catch(SQLException ignored){}
+        return array;
+    }
+
+    public void setPickaxe(UUID uuid, int pickaxe) {
+        try {
+            PreparedStatement ps = App.getInstance().SQL.getConnection().prepareStatement("UPDATE players SET pickaxe=? WHERE uuid=?");
+            ps.setInt(1, (pickaxe));
+            ps.setString(2, uuid.toString());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getPickaxe(UUID uuid) {
+        try {
+            PreparedStatement ps = App.getInstance().SQL.getConnection().prepareStatement("SELECT pickaxe FROM players WHERE uuid=?");
+            ps.setString(1, uuid.toString());
+            ResultSet rs = ps.executeQuery();
+
+            int pickaxe = 1;
+            if (rs.next()) {
+                pickaxe = rs.getInt("pickaxe");
+                return pickaxe;
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -6,10 +6,16 @@ commands:
   eco: {}
   menu: {}
   rebirth: {}
-  locations: {}
-  level: {}
+  locations:
+    aliases: locks
+  level:
+    aliases: lvl
   setvalue: {}
   sellall: {}
   bp: {}
   bits: {}
   upgrade: {}
+  createnpc: {}
+  donate: {}
+  test: {}
+  top: {}

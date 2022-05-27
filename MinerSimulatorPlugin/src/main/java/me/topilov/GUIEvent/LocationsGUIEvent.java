@@ -20,28 +20,32 @@ public class LocationsGUIEvent implements Listener {
 
         if (inventory.getTitle().contains("Локации")) {
             if (clicked == null) return;
-            if (clicked.getType() == Material.SANDSTONE) {
+            if (clicked.getType() == Material.GOLDEN_PICKAXE && e.getSlot() == 12) {
                 player.chat("/locations 1");
                 player.closeInventory();
             }
-            if (clicked.getType() == Material.STONE_SLAB) {
+            if (clicked.getType() == Material.IRON_PICKAXE && e.getSlot() == 13) {
                 player.chat("/locations 2");
                 player.closeInventory();
             }
-            if (clicked.getType() == Material.CRACKED_STONE_BRICKS) {
+            if (clicked.getType() == Material.DIAMOND_PICKAXE) {
                 player.chat("/locations 3");
                 player.closeInventory();
             }
-            if (clicked.getType() == Material.BROWN_TERRACOTTA) {
+            if (clicked.getType() == Material.WOODEN_PICKAXE) {
                 player.chat("/locations 4");
                 player.closeInventory();
             }
-            if (clicked.getType() == Material.YELLOW_TERRACOTTA) {
+            if (clicked.getType() == Material.STONE_PICKAXE) {
                 player.chat("/locations 5");
                 player.closeInventory();
             }
-            if (clicked.getType() == Material.QUARTZ_BLOCK) {
+            if (clicked.getType() == Material.GOLDEN_PICKAXE && e.getSlot() == 23) {
                 player.chat("/locations 6");
+                player.closeInventory();
+            }
+            if (clicked.getType() == Material.IRON_PICKAXE && e.getSlot() == 24) {
+                player.sendMessage("§cЛокация временно закрыта");
                 player.closeInventory();
             }
 

@@ -1,7 +1,6 @@
 package me.topilov.GUI;
 
 import me.topilov.App;
-import me.topilov.Other.InventoryManagement;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,7 +24,6 @@ public class UpgradeGUI implements CommandExecutor {
     public ItemStack wooden_pickaxe = new ItemStack(WOODEN_PICKAXE);
     public ItemStack iron_pickaxe = new ItemStack(IRON_PICKAXE);
     public ItemStack diamond_pickaxe = new ItemStack(DIAMOND_PICKAXE);
-    public ItemStack iron_pickaxe_0 = new ItemStack(IRON_PICKAXE);
     public ItemStack diamond_pickaxe1 = new ItemStack(DIAMOND_PICKAXE);
 
     @Override
@@ -37,626 +35,202 @@ public class UpgradeGUI implements CommandExecutor {
             }
             Player player = (Player) sender;
             ItemStack inhand = player.getInventory().getItemInMainHand();
-            ArrayList<String> lore = new ArrayList<>();
             int balance = (int) economy.getBalance(player);
-            
-            if (args.length == 0){
-                if (inhand.getType() != WOODEN_PICKAXE && inhand.getType() != DIAMOND_PICKAXE && inhand.getType() != IRON_PICKAXE) {
-                    player.sendMessage("Вы должны держать кирку в руках");
-                    return true;
-                }
+
+            if (inhand.getType() != WOODEN_PICKAXE && inhand.getType() != DIAMOND_PICKAXE && inhand.getType() != IRON_PICKAXE && inhand.getType() != GOLDEN_PICKAXE) {
+                player.sendMessage("Вы должны держать кирку в руках");
+                return true;
+            }
+
+            // open inventory menu
+            if (args.length == 0) {
                 Inventory upgrade = Bukkit.getServer().createInventory(null, 9, "Улучшение предмета");
-                
 
-                ItemMeta metaref = diamond_pickaxe1.getItemMeta();
+                setMeta(player);
 
-                if (inhand.getType() == WOODEN_PICKAXE) {
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 1) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 500$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 2) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 1 000$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 3) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 1 500$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 4) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 2 500$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getType() == WOODEN_PICKAXE && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 5)  {
-                        lore.add("");
-                        lore.add("§e§lЦена: 3 500$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                }
-
-                if (inhand.getType() == IRON_PICKAXE) {
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 0) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 4 500$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 1) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 5 500$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 2) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 8 500$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 3) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 9 500$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 4) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 10 000$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getType() == IRON_PICKAXE && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 5)  {
-                        lore.add("");
-                        lore.add("§e§lЦена: 12 000$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                }
-
-                if (player.getInventory().getItemInMainHand().getType() == DIAMOND_PICKAXE) {
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 0) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 14 000");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 1) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 16 000$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 2) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 18 000$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 3) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 20 000$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 4) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 22 000$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getType() == DIAMOND_PICKAXE && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 5)  {
-                        lore.add("");
-                        lore.add("§e§lЦена: 25 000$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getType() == DIAMOND_PICKAXE && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 6)  {
-                        lore.add("");
-                        lore.add("§e§lЦена: 30 000$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 7) {
-                        lore.add("");
-                        lore.add("§e§lЦена: 60 000$");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                    if (inhand.getEnchantments().containsKey(Enchantment.DIG_SPEED) && inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 20) {
-                        lore.add("");
-                        lore.add("§c§lКирка максимально улучшена");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§cУлучшение кирки");
-                    }
-                }
-
-                metaref.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-
-                diamond_pickaxe1.setItemMeta(metaref);
                 upgrade.setItem(4, diamond_pickaxe1);
-
                 player.openInventory(upgrade);
                 return true;
             }
-                if (args[0].equalsIgnoreCase("wooden_pickaxe_1")) {
-                    int price = 1000;
-                    
-                    if(balance < price) {
+
+            /* upgrade CMD's (upgradeInvClick):
+             /upgrade <w
+             /upgrade <i
+             /upgrade <d
+            */
+            for (int i = 1; i <= 5; i++) {
+                    int price = App.getInstance().getConfig().getInt("upgrade.price.wooden." + i);
+                    if (args[0].equalsIgnoreCase("<w" + i)) {
+
+                        if (balance < price) {
+                            player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
+                            return true;
+                        }
+
+                        player.getInventory().setItemInMainHand(null);
+
+                        economy.withdrawPlayer(player, price);
+
+                        setMetaWoodenPickaxe(i);
+
+                        player.getInventory().addItem(wooden_pickaxe);
+                    }
+            }
+
+            for (int i = 1; i <= 5; i++) {
+                if (args[0].equalsIgnoreCase("<i" + i)) {
+                    int price = App.getInstance().getConfig().getInt("upgrade.price.iron." + i);
+
+                    if (balance < price) {
                         player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
                         return true;
                     }
 
-                    InventoryManagement.removeItem(player, wooden_pickaxe);
+                    player.getInventory().setItemInMainHand(null);
 
-                    economy.depositPlayer(player, price);
+                    economy.withdrawPlayer(player, price);
 
-                    ItemMeta itemMeta = wooden_pickaxe.getItemMeta();
-                    itemMeta.setDisplayName("Кирка ур.1");
+                    setMetaIronPickaxe(i);
 
-                    itemMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
-                    wooden_pickaxe.setItemMeta(itemMeta);
-
-                    player.getInventory().addItem(wooden_pickaxe); //выдача
+                    player.getInventory().addItem(iron_pickaxe);
                 }
-                
-                if (args[0].equalsIgnoreCase("wooden_pickaxe_2")) {
-                    int price = 500;
+            }
 
-                    if(balance < price) {
+            for (int i = 1; i <= 5; i++) {
+                int price = App.getInstance().getConfig().getInt("upgrade.price.diamond." + i);
+                if (args[0].equalsIgnoreCase("<d" + i)) {
+
+                    if (balance < price) {
                         player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
                         return true;
                     }
 
-                    InventoryManagement.removeItem(player, wooden_pickaxe);
+                    player.getInventory().setItemInMainHand(null);
 
-                    economy.depositPlayer(player, price);
+                    economy.withdrawPlayer(player, price);
 
-                    ItemMeta itemMeta = wooden_pickaxe.getItemMeta(); //получает меты
-                    itemMeta.setDisplayName("Кирка ур.2"); // установка названия
+                    setMetaDiamondPickaxe(i);
 
-                    itemMeta.addEnchant(Enchantment.DIG_SPEED, 2, true);
-                    wooden_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                    player.getInventory().addItem(wooden_pickaxe); //выдача
+                    player.getInventory().addItem(diamond_pickaxe);
                 }
-
-
-
-                if (args[0].equalsIgnoreCase("wooden_pickaxe_3")) {
-                    int price = 1000;
-
-                    if(balance < price) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                        return true;
-                    }
-
-                    InventoryManagement.removeItem(player, wooden_pickaxe);
-
-                    economy.depositPlayer(player, price);
-
-                    ItemMeta itemMeta = wooden_pickaxe.getItemMeta(); //получает меты
-                    itemMeta.setDisplayName("Кирка ур.3"); // установка названия
-
-                    itemMeta.addEnchant(Enchantment.DIG_SPEED, 3, true);
-                    wooden_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                    player.getInventory().addItem(wooden_pickaxe); //выдача
-                }
-
-
-
-
-            if (args[0].equalsIgnoreCase("wooden_pickaxe_4")) {
-                int price = 1500;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, wooden_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = wooden_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.4"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 4, true);
-                wooden_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(wooden_pickaxe); //выдача
             }
 
-
-
-            if (args[0].equalsIgnoreCase("wooden_pickaxe_5")) {
-                int price = 2500;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, wooden_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = wooden_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.5"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 5, true);
-                wooden_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(wooden_pickaxe); //выдача
-            }
-            
-            if (args[0].equalsIgnoreCase("iron_pickaxe_0")) {
-                int price = 3500;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                economy.depositPlayer(player, price);
-
-
-                ItemMeta itemMeta_0 = iron_pickaxe_0.getItemMeta(); //получает меты
-                itemMeta_0.setDisplayName("Кирка ур.6"); // установка названия
-
-                itemMeta_0.addEnchant(Enchantment.DIG_SPEED, 0, true);
-                iron_pickaxe_0.setItemMeta(itemMeta_0); //вешает мету (енчант и название)
-
-                InventoryManagement.removeItem(player, wooden_pickaxe);
-                player.getInventory().addItem(iron_pickaxe_0); //выдача
-            }
-
-            if (args[0].equalsIgnoreCase("iron_pickaxe_1")) {
-                int price = 4500;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = iron_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.7"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
-                iron_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                InventoryManagement.removeItem(player, iron_pickaxe_0);
-                player.getInventory().addItem(iron_pickaxe); //выдача
-            }
-
-            if (args[0].equalsIgnoreCase("iron_pickaxe_2")) {
-                int price = 5500;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, iron_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = iron_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.8"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 2, true);
-                iron_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(iron_pickaxe); //выдача
-            }
-
-            if (args[0].equalsIgnoreCase("iron_pickaxe_3")) {
-                int price = 8500;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, iron_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = iron_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.9"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 3, true);
-                iron_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(iron_pickaxe); //выдача
-            }
-
-            if (args[0].equalsIgnoreCase("iron_pickaxe_4")) {
-                int price = 9500;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, iron_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = iron_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.10"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 4, true);
-                iron_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(iron_pickaxe); //выдача
-            }
-
-
-
-            if (args[0].equalsIgnoreCase("iron_pickaxe_5")) {
-                int price = 10000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, iron_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = iron_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.11"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 5, true);
-                iron_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(iron_pickaxe); //выдача
-            }
-
-            if (args[0].equalsIgnoreCase("diamond_pickaxe_0")) {
-                int price = 12000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                economy.depositPlayer(player, price);
-
-
-                ItemMeta itemMeta = diamond_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.12"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 0, true);
-                diamond_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                InventoryManagement.removeItem(player, iron_pickaxe);
-                player.getInventory().addItem(diamond_pickaxe);
-
-            }
-
-
-
-            if (args[0].equalsIgnoreCase("diamond_pickaxe_1")) {
-                int price = 14000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, diamond_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = diamond_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.13"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
-                diamond_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(diamond_pickaxe); //выдача
-            }
-
-
-
-            if (args[0].equalsIgnoreCase("diamond_pickaxe_2")) {
-                int price = 16000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, diamond_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = diamond_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.14"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 2, true);
-                diamond_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(diamond_pickaxe); //выдача
-            }
-
-
-
-            if (args[0].equalsIgnoreCase("diamond_pickaxe_3")) {
-                int price = 18000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, diamond_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = diamond_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.15"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 3, true);
-                diamond_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(diamond_pickaxe); //выдача
-            }
-
-
-
-            if (args[0].equalsIgnoreCase("diamond_pickaxe_4")) {
-                int price = 20000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, diamond_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = diamond_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.16"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 4, true);
-                diamond_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(diamond_pickaxe); //выдача
-            }
-
-
-
-            if (args[0].equalsIgnoreCase("diamond_pickaxe_5")) {
-                int price = 22000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, diamond_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = diamond_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.17"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 5, true);
-                diamond_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(diamond_pickaxe); //выдача
-            }
-
-
-
-            if (args[0].equalsIgnoreCase("diamond_pickaxe_6")) {
-                int price = 25000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, diamond_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = diamond_pickaxe.getItemMeta(); //получает меты
-                itemMeta.setDisplayName("Кирка ур.18"); // установка названия
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 6, true);
-                diamond_pickaxe.setItemMeta(itemMeta); //вешает мету (енчант и название)
-
-                player.getInventory().addItem(diamond_pickaxe); //выдача
-            }
-
-
-
-
-            if (args[0].equalsIgnoreCase("diamond_pickaxe_7")) {
-                int price = 30000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, diamond_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                player.chat("/eco remove " + price);
-
-                ItemMeta itemMeta = diamond_pickaxe.getItemMeta();
-                itemMeta.setDisplayName("Кирка ур.19");
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 7, true);
-                diamond_pickaxe.setItemMeta(itemMeta);
-
-                player.getInventory().addItem(diamond_pickaxe);
-            }
-
-
-
-
-            if (args[0].equalsIgnoreCase("diamond_pickaxe_7")) {
-                int price = 30000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, diamond_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = diamond_pickaxe.getItemMeta();
-                itemMeta.setDisplayName("Кирка ур.19");
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 7, true);
-                diamond_pickaxe.setItemMeta(itemMeta);
-
-                player.getInventory().addItem(diamond_pickaxe);
-            }
-            if (args[0].equalsIgnoreCase("diamond_pickaxe_20")) {
-                int price = 60000;
-
-                if(balance < price) {
-                    player.sendMessage(ChatColor.RED + "Недостаточно денег, нужно: " + price);
-                    return true;
-                }
-
-                InventoryManagement.removeItem(player, diamond_pickaxe);
-
-                economy.depositPlayer(player, price);
-
-                ItemMeta itemMeta = diamond_pickaxe.getItemMeta();
-                itemMeta.setDisplayName("Кирка ур.20");
-
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 20, true);
-                diamond_pickaxe.setItemMeta(itemMeta);
-
-                player.getInventory().addItem(diamond_pickaxe);
-            }
-
-            }
-        return true;
         }
+        return true;
     }
+
+    void setMetaWoodenPickaxe(int value) {
+        ItemMeta itemMeta = wooden_pickaxe.getItemMeta();
+        ArrayList<String> lore = new ArrayList<>();
+        itemMeta.setDisplayName("§7Обычная Деревянная Кирка");
+        lore.add("§eУровень " + (value + 1));
+        lore.add("");
+        lore.add("§7Обычная кирка для добычи.");
+        lore.add("§7Повышайте уровень своей кирки,");
+        lore.add("§7чтобы она копала быстрее!");
+        lore.add("");
+        lore.add("§aОбычный предмет");
+        itemMeta.addEnchant(Enchantment.DIG_SPEED, (value + 1), true);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.setLore(lore);
+        itemMeta.setUnbreakable(true);
+        wooden_pickaxe.setItemMeta(itemMeta);
+    }
+
+    void setMetaIronPickaxe(int value) {
+        ItemMeta itemMeta = iron_pickaxe.getItemMeta();
+        ArrayList<String> lore = new ArrayList<>();
+        itemMeta.setDisplayName("§7Обычная Железная Кирка");
+        lore.add("§eУровень " + value);
+        lore.add("");
+        lore.add("§7Обычная кирка для добычи.");
+        lore.add("§7Повышайте уровень своей кирки,");
+        lore.add("§7чтобы она копала быстрее!");
+        lore.add("");
+        lore.add("§aОбычный предмет");
+        itemMeta.addEnchant(Enchantment.DIG_SPEED, value, true);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.setLore(lore);
+        itemMeta.setUnbreakable(true);
+        iron_pickaxe.setItemMeta(itemMeta);
+    }
+
+    void setMetaDiamondPickaxe(int value) {
+        ItemMeta itemMeta = diamond_pickaxe.getItemMeta();
+        ArrayList<String> lore = new ArrayList<>();
+        itemMeta.setDisplayName("§7Обычная Алмазная Кирка");
+        lore.add("§eУровень " + value);
+        lore.add("");
+        lore.add("§7Обычная кирка для добычи.");
+        lore.add("§7Повышайте уровень своей кирки,");
+        lore.add("§7чтобы она копала быстрее!");
+        lore.add("");
+        lore.add("§aОбычный предмет");
+        itemMeta.addEnchant(Enchantment.DIG_SPEED, value, true);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.setLore(lore);
+        itemMeta.setUnbreakable(true);
+        diamond_pickaxe.setItemMeta(itemMeta);
+    }
+
+    void setMeta(Player player) {
+        ItemMeta itemMeta = diamond_pickaxe1.getItemMeta();
+        ArrayList<String> lore = new ArrayList<>();
+        ItemStack inhand = player.getInventory().getItemInMainHand();
+        int balance = (int) economy.getBalance(player);
+
+        lore.add("");
+        lore.add("§7Улучшайте кирку, чтобы зарабатывать больше");
+        lore.add("§7монет и быстрее прокачивать свой уровень!");
+        lore.add("");
+        lore.add("§6Необходимая статистика");
+
+        if (inhand.getType() == WOODEN_PICKAXE) {
+            for (int i = 1; i <= 5; i++) {
+                int price = App.getInstance().getConfig().getInt("upgrade.price.wooden." + i);
+                if (inhand.getEnchantments().get(Enchantment.DIG_SPEED) == i) {
+                    if (balance >= price) {
+                        lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/" + price);
+                    } else {
+                        lore.add(" §fМонеты: §c§l✖ §c" + balance + "§a/" + price);
+                    }
+                }
+            }
+        } else if (inhand.getType() == IRON_PICKAXE) {
+            for (int i = 1; i <= 5; i++) {
+                int price = App.getInstance().getConfig().getInt("upgrade.price.iron." + (i + 1)); // добавляется плюс чтобы шло от 2 значения в конфиге
+                if (inhand.getEnchantments().get(Enchantment.DIG_SPEED) == i ) {
+                    if (balance >= price) {
+                        lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/" + price);
+                    } else {
+                        lore.add(" §fМонеты: §c§l✖ §c" + balance + "§a/" + price);
+                    }
+                }
+            }
+        } else if (inhand.getType() == DIAMOND_PICKAXE) {
+            for (int i = 1; i <= 4; i++) {
+                int price = App.getInstance().getConfig().getInt("upgrade.price.diamond." + (i + 1)); // добавляется плюс чтобы шло от 2 значения в конфиге
+                if (inhand.getEnchantments().get(Enchantment.DIG_SPEED) == i ){
+                    if (balance >= price) {
+                        lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/" + price);
+                    } else {
+                        lore.add(" §fМонеты: §c§l✖ §c" + balance + "§a/" + price);
+                    }
+                } else if (inhand.getEnchantments().get(Enchantment.DIG_SPEED) == 5) {
+                    lore.add(ChatColor.RED + "Кирка максимально улучшена");
+                    break;
+                }
+            }
+        } else if (player.getInventory().getItemInMainHand().getType() == DIAMOND_PICKAXE
+                && player.getInventory().getItemInMainHand().getEnchantments().get(Enchantment.DIG_SPEED) == 5) {
+            lore.add(ChatColor.RED + "Кирка максимально улучшена");
+        }
+
+        lore.add("");
+        lore.add("§e▶ Нажмите, чтобы улучшить предмет");
+        itemMeta.setLore(lore);
+        itemMeta.setDisplayName("§cУлучшение кирки");
+        diamond_pickaxe1.setItemMeta(itemMeta);
+    }
+
+}

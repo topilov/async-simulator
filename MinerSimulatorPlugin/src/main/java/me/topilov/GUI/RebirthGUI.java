@@ -1,8 +1,8 @@
 package me.topilov.GUI;
 
 import me.topilov.App;
-import me.topilov.Other.InventoryManagement;
 import me.topilov.sql.SQLGetter;
+import me.topilov.utils.InventoryManagement;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RebirthGUI implements CommandExecutor {
     private final Economy economy = App.economy;
@@ -35,284 +36,164 @@ public class RebirthGUI implements CommandExecutor {
             }
             Player player = (Player) sender;
             int rebirth = data.getRebirth(player.getUniqueId());
-            int balance = (int) economy.getBalance(player);
-            int level = data.getLevel(player.getUniqueId());
 
             if(args.length == 0) {
 
-                    Inventory rebirthMenu = Bukkit.getServer().createInventory(null, 9, "Перерождение");
+                Inventory menu = Bukkit.getServer().createInventory(null, 9, "Перерождение");
 
-                    ArrayList<String> lore = new ArrayList<>();
-
-                    ItemMeta metaref = rebirthItem.getItemMeta();
-
-                    if(rebirth == 0) {
-                        lore.add("");
-                        lore.add("§7Думаешь ты уже готов начать всё  ");
-                        lore.add("§7сначала? Не бойся! Это будет такжe");
-                        lore.add("§7увлекательно, как и до этого. К  ");
-                        lore.add("§7тому же получишь награду в виде");
-                        lore.add("§7вечных бустеров статистики:");
-                        lore.add("");
-                        lore.add("  §cБлоки §f+100%");
-                        lore.add("  §eМонеты §f+100%");
-                        lore.add("  §6Артефакты §f+100%");
-                        lore.add("  §bОпыт §f+100%");
-                        lore.add("");
-                        lore.add("§aДополнительная награда:");
-                        lore.add("§6 ✪ §f+ §d25 Битсов");
-                        lore.add("§6 ✪ §710% на §bСлот для Питомца");
-                        lore.add("");
-                        lore.add("§6Необходимая статистика");
-                        if(balance > 500000) {
-                            lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/500000");
-                        } else {
-                            lore.add(" §fМонеты: §c§l✖ §c" + balance + "§a/500000");
-                        }
-                        if(level == 6) {
-                            lore.add(" §fУровень: §a§l✔ §a" + level + "§a/6");
-                        } else {
-                            lore.add(" §fУровень: §c§l✖ §c" + level + "§a/6");
-                        }
-                        lore.add("§e§l▶ §eНажмите, чтобы переродиться");
-                        metaref.setLore(lore);
-                        metaref.setDisplayName("§6Перерождение");
-                }
-                if (rebirth == 1) {
-                    lore.add("");
-                    lore.add("§7Думаешь ты уже готов начать всё  ");
-                    lore.add("§7сначала? Не бойся! Это будет такжe");
-                    lore.add("§7увлекательно, как и до этого. К  ");
-                    lore.add("§7тому же получишь награду в виде");
-                    lore.add("§7вечных бустеров статистики:");
-                    lore.add("");
-                    lore.add("  §cБлоки §f+100%");
-                    lore.add("  §eМонеты §f+100%");
-                    lore.add("  §6Артефакты §f+100%");
-                    lore.add("  §bОпыт §f+100%");
-                    lore.add("");
-                    lore.add("§aДополнительная награда:");
-                    lore.add("§6 ✪ §f+ §d25 Битсов");
-                    lore.add("§6 ✪ §710% на §bСлот для Питомца");
-                    lore.add("");
-                    lore.add("§6Необходимая статистика");
-                    if(balance > 1000000) {
-                        lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/1000000");
-                    } else {
-                        lore.add(" §fМонеты: §c§l✖ §c" + balance + "§a/1000000");
-                    }
-                    if(level == 6) {
-                        lore.add(" §fУровень: §a§l✔ §a" + level + "§a/6");
-                    } else {
-                        lore.add(" §fУровень: §c§l✖ §c" + level + "§a/6");
-                    }
-                    lore.add("§e§l▶ §eНажмите, чтобы переродиться");
-                    metaref.setLore(lore);
-                    metaref.setDisplayName("§6Перерождение");
-                }
-                if (rebirth == 2) {
-                    lore.add("");
-                    lore.add("§7Думаешь ты уже готов начать всё  ");
-                    lore.add("§7сначала? Не бойся! Это будет такжe");
-                    lore.add("§7увлекательно, как и до этого. К  ");
-                    lore.add("§7тому же получишь награду в виде");
-                    lore.add("§7вечных бустеров статистики:");
-                    lore.add("");
-                    lore.add("  §cБлоки §f+100%");
-                    lore.add("  §eМонеты §f+100%");
-                    lore.add("  §6Артефакты §f+100%");
-                    lore.add("  §bОпыт §f+100%");
-                    lore.add("");
-                    lore.add("§aДополнительная награда:");
-                    lore.add("§6 ✪ §f+ §d25 Битсов");
-                    lore.add("§6 ✪ §710% на §bСлот для Питомца");
-                    lore.add("");
-                    lore.add("§6Необходимая статистика");
-                    if(balance > 500000) {
-                        lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/2000000");
-                    } else {
-                        lore.add(" §fМонеты: §c§l✖ §c" + balance + "§a/2000000");
-                    }
-                    if(level == 6) {
-                        lore.add(" §fУровень: §a§l✔ §a" + level + "§a/6");
-                    } else {
-                        lore.add(" §fУровень: §c§l✖ §c" + level + "§a/6");
-                    }
-                    lore.add("§e§l▶ §eНажмите, чтобы переродиться");
-                    metaref.setLore(lore);
-                    metaref.setDisplayName("§6Перерождение");
-                }
-                if (rebirth == 3) {
-                    lore.add("");
-                    lore.add("§7Думаешь ты уже готов начать всё  ");
-                    lore.add("§7сначала? Не бойся! Это будет такжe");
-                    lore.add("§7увлекательно, как и до этого. К  ");
-                    lore.add("§7тому же получишь награду в виде");
-                    lore.add("§7вечных бустеров статистики:");
-                    lore.add("");
-                    lore.add("  §cБлоки §f+100%");
-                    lore.add("  §eМонеты §f+100%");
-                    lore.add("  §6Артефакты §f+100%");
-                    lore.add("  §bОпыт §f+100%");
-                    lore.add("");
-                    lore.add("§aДополнительная награда:");
-                    lore.add("§6 ✪ §f+ §d25 Битсов");
-                    lore.add("§6 ✪ §710% на §bСлот для Питомца");
-                    lore.add("");
-                    lore.add("§6Необходимая статистика");
-                    if(balance > 500000) {
-                        lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/3000000");
-                    } else {
-                        lore.add(" §fМонеты: §c§l✖ §c" + balance + "§a/3000000");
-                    }
-                    if(level == 6) {
-                        lore.add(" §fУровень: §a§l✔ §a" + level + "§a/6");
-                    } else {
-                        lore.add(" §fУровень: §c§l✖ §c" + level + "§a/6");
-                    }
-                    lore.add("§e§l▶ §eНажмите, чтобы переродиться");
-                    metaref.setLore(lore);
-                    metaref.setDisplayName("§6Перерождение");
-                }
-                if (rebirth == 4) {
-                    lore.add("");
-                    lore.add("§7Думаешь ты уже готов начать всё  ");
-                    lore.add("§7сначала? Не бойся! Это будет такжe");
-                    lore.add("§7увлекательно, как и до этого. К  ");
-                    lore.add("§7тому же получишь награду в виде");
-                    lore.add("§7вечных бустеров статистики:");
-                    lore.add("");
-                    lore.add("  §cБлоки §f+100%");
-                    lore.add("  §eМонеты §f+100%");
-                    lore.add("  §6Артефакты §f+100%");
-                    lore.add("  §bОпыт §f+100%");
-                    lore.add("");
-                    lore.add("§aДополнительная награда:");
-                    lore.add("§6 ✪ §f+ §d25 Битсов");
-                    lore.add("§6 ✪ §710% на §bСлот для Питомца");
-                    lore.add("");
-                    lore.add("§6Необходимая статистика");
-                    if(balance > 4000000) {
-                        lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/4000000");
-                    } else {
-                        lore.add(" §fМонеты: §c§l✖ §c" + balance + "§a/4000000");
-                    }
-                    if(level == 6) {
-                        lore.add(" §fУровень: §a§l✔ §a" + level + "§a/6");
-                    } else {
-                        lore.add(" §fУровень: §c§l✖ §c" + level + "§a/6");
-                    }
-                    lore.add("§e§l▶ §eНажмите, чтобы переродиться");
-                    metaref.setLore(lore);
-                    metaref.setDisplayName("§6Перерождение");
-                }
-                if (rebirth == 5 || rebirth > 5) {
-
-                    player.sendMessage(ChatColor.RED + "У вас максимальный rebirth");
+                if (rebirth == 5) {
+                    player.sendMessage("У вас максимальное количество перерождений");
                     return true;
                 }
 
-                    metaref.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+                    setMeta(player);
 
-                    rebirthItem.setItemMeta(metaref);
-                    rebirthMenu.setItem(4, rebirthItem);
-
-                    player.openInventory(rebirthMenu);
+                    menu.setItem(4, rebirthItem);
+                    player.openInventory(menu);
                     return true;
-                }
-
-            if (args[0].equalsIgnoreCase("create")) {
-                if(rebirth == 0) {
-                    int price = 500000;
-                    if (balance < price) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно денег для перерождения");
-                        return true;
-                    }
-                    if (level != 6) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно уровня для перерождения");
-                        return true;
-                }
             }
 
-                if(rebirth == 1) {
-                    int price = 1000000;
-                    if (balance < price) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно денег для перерождения");
-                        return true;
-                    }
-                    if (level != 6) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно уровня для перерождения");
-                        return true;
-                    }
-                }
+            if (args[0].equalsIgnoreCase("create")) {
 
-                if(rebirth == 2) {
-                    int price = 2000000;
-                    if (balance < price) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно денег для перерождения");
-                        return true;
-                    }
-                    if (level != 6) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно уровня для перерождения");
-                        return true;
-                    }
-                }
+                rebirthCreate(player);
 
-                if(rebirth == 3) {
-                    int price = 3000000;
-                    if (balance < price) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно денег для перерождения");
-                        return true;
-                    }
-                    if (level != 6) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно уровня для перерождения");
-                        return true;
-                    }
-                }
+            return true;
+        }
+    }
+    return true;
+}
 
-                if(rebirth == 4) {
-                    int price = 4000000;
-                    if (balance < price) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно денег для перерождения");
-                        return true;
-                    }
-                    if (level != 6) {
-                        player.sendMessage(ChatColor.RED + "Недостаточно уровня для перерождения");
-                        return true;
-                    }
-                }
 
-                if(rebirth == 5) {
-                    player.sendMessage(ChatColor.RED + "У вас максимальный rebirth");
+
+
+
+
+
+
+
+
+
+
+
+
+
+    boolean setMeta(Player player) {
+
+        int rebirth = data.getRebirth(player.getUniqueId());
+        int level = data.getLevel(player.getUniqueId());
+        double balance = economy.getBalance(player);
+
+
+        ArrayList<String> lore = new ArrayList<>();
+
+        ItemMeta metaref = rebirthItem.getItemMeta();
+
+        lore.add("");
+        lore.add("§7Думаешь ты уже готов начать всё  ");
+        lore.add("§7сначала? Не бойся! Это будет такжe");
+        lore.add("§7увлекательно, как и до этого. К  ");
+        lore.add("§7тому же получишь награду в виде");
+        lore.add("§7вечных бустеров статистики:");
+        lore.add("");
+        lore.add("  §cБлоки §f+100%");
+        lore.add("  §eМонеты §f+100%");
+        lore.add("  §6Артефакты §f+100%");
+        lore.add("  §bОпыт §f+100%");
+        lore.add("");
+        lore.add("§aДополнительная награда:");
+        lore.add("§6 ✪ §f+ §d25 Битсов");
+        lore.add("§6 ✪ §710% на §bСлот для Питомца");
+        lore.add("");
+        lore.add("§6Необходимая статистика");
+        metaref.setDisplayName("§6Перерождение");
+
+        for (int i = 0; i <= 4; i++) {
+            if (rebirth == i) {
+                int price = App.getInstance().getConfig().getInt("rebirth.price." + i);
+                if (balance > price) {
+                    lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/" + price);
+                } else {
+                    lore.add(" §fМонеты: §c§l✖ §c" + balance + "§a/" + price);
+                }
+                if (level == 6) {
+                    lore.add(" §fУровень: §a§l✔ §a" + level + "§a/6");
+                } else {
+                    lore.add(" §fУровень: §c§l✖ §c" + level + "§a/6");
+                }
+                lore.add("§e§l▶ §eНажмите, чтобы переродиться");
+                metaref.setLore(lore);
+            }
+        }
+
+        rebirthItem.setItemMeta(metaref);
+        return true;
+    }
+
+    private boolean rebirthCreate(Player player) {
+
+        int rebirth = data.getRebirth(player.getUniqueId());
+        int level = data.getLevel(player.getUniqueId());
+        double balance = economy.getBalance(player);
+
+        for (int i = 0; i <= 4; i++) {
+            if(rebirth == i) {
+                int price = App.getInstance().getConfig().getInt("rebirth.price." + i);
+                if (balance < price) {
+                    player.sendMessage(ChatColor.RED + "Недостаточно денег для перерождения");
                     return true;
                 }
-
-                InventoryManagement.clear(player);
-                player.chat("/spawn");
-
-                ItemStack wooden_pickaxe = new ItemStack(Material.WOODEN_PICKAXE);
-                ItemMeta itemMeta = wooden_pickaxe.getItemMeta();
-                itemMeta.setDisplayName("Кирка ур.1");
-                itemMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
-                wooden_pickaxe.setItemMeta(itemMeta);
-
-                InventoryManagement.addItem(player, wooden_pickaxe);
-
-                economy.withdrawPlayer(player, balance);
-                data.setLevel(player.getUniqueId(), 1);
-                data.setBlocks(player.getUniqueId(), 0);
-                data.setBlocksBP(player.getUniqueId(), 0);
-                data.setBackPack(player.getUniqueId(), 50);
-
-                data.addRebirth(player.getUniqueId(), 1);
-                data.addBoosterEXP(player.getUniqueId(), 1);
-                data.addBoosterBlocks(player.getUniqueId(), 1);
-                data.addBoosterBalance(player.getUniqueId(), 1);
-                data.addBoosterArtefacts(player.getUniqueId(), 1);
-
+                if (level != 6) {
+                    player.sendMessage(ChatColor.RED + "Недостаточно уровня для перерождения");
+                    return true;
+                }
+            } else if (rebirth == 5) {
+                player.sendMessage(ChatColor.RED + "У вас максимальное количество перерождений");
                 return true;
             }
         }
+
+        InventoryManagement.clear(player);
+        player.chat("/locations spawn");
+
+        if (data.getPickaxe(player.getUniqueId()) == 1) {
+            ItemStack pickaxe = new ItemStack(Material.GOLDEN_PICKAXE);
+            ItemMeta itemMeta = pickaxe.getItemMeta();
+
+            itemMeta.setDisplayName(ChatColor.GOLD + "Супер Кирка");
+            List<String> lore3 = new ArrayList<>();
+
+            lore3.add("");
+            lore3.add(ChatColor.WHITE + "Супер кирка, которая дает уникальные способности");
+
+            itemMeta.addEnchant(Enchantment.DIG_SPEED, 300, true);
+            itemMeta.setUnbreakable(true);
+            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            itemMeta.setLore(lore3);
+            pickaxe.setItemMeta(itemMeta);
+
+            player.getInventory().addItem(pickaxe);
+        } else {
+            ItemStack wooden_pickaxe = new ItemStack(Material.WOODEN_PICKAXE);
+            ItemMeta itemMeta = wooden_pickaxe.getItemMeta();
+            itemMeta.setDisplayName("Кирка ур.1");
+            itemMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+            wooden_pickaxe.setItemMeta(itemMeta);
+
+            player.getInventory().addItem(wooden_pickaxe);
+        }
+
+
+        economy.withdrawPlayer(player, economy.getBalance(player));
+        data.setLevel(player.getUniqueId(), 1);
+        data.setBlocks(player.getUniqueId(), 0);
+        data.setBlocksBP(player.getUniqueId(), 0);
+        data.setBackPack(player.getUniqueId(), 50);
+
+        data.addRebirth(player.getUniqueId(), 1);
+        data.addBoosterEXP(player.getUniqueId(), 1);
+        data.addBoosterBlocks(player.getUniqueId(), 1);
+        data.addBoosterBalance(player.getUniqueId(), 1);
+        data.addBoosterArtefacts(player.getUniqueId(), 1);
         return true;
     }
 }

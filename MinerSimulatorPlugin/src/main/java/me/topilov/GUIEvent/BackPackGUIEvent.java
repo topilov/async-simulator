@@ -21,9 +21,7 @@ public class BackPackGUIEvent implements Listener {
             if (clicked == null) return;
             if (clicked.getType() == Material.CHEST) {
                 player.chat("/bp upgrade");
-                player.closeInventory();
-            } else {
-                player.sendMessage("произошло исключение");
+                player.chat("/bp");
             }
         }
     }

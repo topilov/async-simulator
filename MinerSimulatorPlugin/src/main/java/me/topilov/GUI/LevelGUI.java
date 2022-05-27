@@ -41,18 +41,19 @@ public class LevelGUI implements CommandExecutor {
             ArrayList<String> lore = new ArrayList<>();
             ItemMeta metaref = levelItem.getItemMeta();
 
+            lore.add("");
+            lore.add("§6С новым уровнем вы получите");
+            lore.add("§f + Доступ к новой Локации");
+            lore.add("§f + §b5000 Опыта");
+            lore.add("");
+            lore.add("§aДополнительная награда:");
+            lore.add("§6 ✪ §f+ §d5 Битсов");
+            lore.add("§6 ✪ §725% на §bКлюч от Ящика с Питомцами");
+            lore.add("");
+            lore.add("§6Необходимая статистика");
+
             if(args.length == 0) {
                 if(level == 1) {
-                    lore.add("");
-                    lore.add("§6С новым уровнем вы получите");
-                    lore.add("§f + Доступ к новой Локации");
-                    lore.add("§f + §b5000 Опыта");
-                    lore.add("");
-                    lore.add("§aДополнительная награда:");
-                    lore.add("§6 ✪ §f+ §d5 Битсов");
-                    lore.add("§6 ✪ §725% на §bКлюч от Ящика с Питомцами");
-                    lore.add("");
-                    lore.add("§6Необходимая статистика");
                     if(balance > 500) {
                         lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/500");
                     } else {
@@ -68,16 +69,6 @@ public class LevelGUI implements CommandExecutor {
                     metaref.setDisplayName("§6Прокачка уровня: §71 §6➜ §e2 Уровень");
                 }
                 if(level == 2) {
-                    lore.add("");
-                    lore.add("§6С новым уровнем вы получите");
-                    lore.add("§f + Доступ к новой Локации");
-                    lore.add("§f + §b5000 Опыта");
-                    lore.add("");
-                    lore.add("§aДополнительная награда:");
-                    lore.add("§6 ✪ §f+ §d5 Битсов");
-                    lore.add("§6 ✪ §725% на §bКлюч от Ящика с Питомцами");
-                    lore.add("");
-                    lore.add("§6Необходимая статистика");
                     if(balance > 2000) {
                         lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/2000");
                     } else {
@@ -93,16 +84,6 @@ public class LevelGUI implements CommandExecutor {
                     metaref.setDisplayName("§6Прокачка уровня: §72 §6➜ §e3 Уровень");
                 }
                 if(level == 3) {
-                    lore.add("");
-                    lore.add("§6С новым уровнем вы получите");
-                    lore.add("§f + Доступ к новой Локации");
-                    lore.add("§f + §b5000 Опыта");
-                    lore.add("");
-                    lore.add("§aДополнительная награда:");
-                    lore.add("§6 ✪ §f+ §d5 Битсов");
-                    lore.add("§6 ✪ §725% на §bКлюч от Ящика с Питомцами");
-                    lore.add("");
-                    lore.add("§6Необходимая статистика");
                     if(balance > 5000) {
                         lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/5000");
                     } else {
@@ -118,16 +99,6 @@ public class LevelGUI implements CommandExecutor {
                     metaref.setDisplayName("§6Прокачка уровня: §73 §6➜ §e4 Уровень");
                 }
                 if(level == 4) {
-                    lore.add("");
-                    lore.add("§6С новым уровнем вы получите");
-                    lore.add("§f + Доступ к новой Локации");
-                    lore.add("§f + §b5000 Опыта");
-                    lore.add("");
-                    lore.add("§aДополнительная награда:");
-                    lore.add("§6 ✪ §f+ §d5 Битсов");
-                    lore.add("§6 ✪ §725% на §bКлюч от Ящика с Питомцами");
-                    lore.add("");
-                    lore.add("§6Необходимая статистика");
                     if(balance > 7500) {
                         lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/7500");
                     } else {
@@ -143,16 +114,6 @@ public class LevelGUI implements CommandExecutor {
                     metaref.setDisplayName("§6Прокачка уровня: §74 §6➜ §e5 Уровень");
                 }
                 if(level == 5) {
-                    lore.add("");
-                    lore.add("§6С новым уровнем вы получите");
-                    lore.add("§f + Доступ к новой Локации");
-                    lore.add("§f + §b5000 Опыта");
-                    lore.add("");
-                    lore.add("§aДополнительная награда:");
-                    lore.add("§6 ✪ §f+ §d5 Битсов");
-                    lore.add("§6 ✪ §725% на §bКлюч от Ящика с Питомцами");
-                    lore.add("");
-                    lore.add("§6Необходимая статистика");
                     if(balance > 15000) {
                         lore.add(" §fМонеты: §a§l✔ §a" + balance + "§a/15000");
                     } else {
@@ -168,8 +129,8 @@ public class LevelGUI implements CommandExecutor {
                     metaref.setDisplayName("§6Прокачка уровня: §75 §6➜ §e6 Уровень");
                 }
                 if(level == 6) {
-                player.sendTitle(ChatColor.RED + "У вас максимальный уровень!",ChatColor.GRAY + "Используйте /rebirth чтобы переродиться", 20,40,20);
-                return true;
+                    player.sendTitle(ChatColor.RED + "У вас максимальный уровень!",ChatColor.GRAY + "Используйте /rebirth чтобы переродиться", 20,40,20);
+                    return true;
                 }
 
                 metaref.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
@@ -239,10 +200,7 @@ public class LevelGUI implements CommandExecutor {
                         return true;
                     }
                     player.chat("/eco remove " + price);
-                }
-                if (level == 6 || level > 6) {
-                    player.sendTitle(ChatColor.RED + "У вас максимальный уровень!",ChatColor.GRAY + "Используйте /rebirth чтобы переродиться", 20,40,20);
-                    return true;
+                    player.closeInventory();
                 }
 
                 int random = (int) (Math.random() * 4) + 1;
@@ -250,15 +208,16 @@ public class LevelGUI implements CommandExecutor {
                     case 1: {
 
                         ItemMeta meta = keyPetItem.getItemMeta();
+                        ArrayList<String> lore_1 = new ArrayList<>();
 
                         meta.setDisplayName("§bКлюч от Ящика с Питомцами");
-                        lore.add("");
-                        lore.add("§7Нажми ПКМ по кейсу на спавне");
-                        meta.setLore(lore);
+                        lore_1.add("");
+                        lore_1.add("§7Нажми ПКМ по кейсу на спавне");
+                        meta.setLore(lore_1);
                         keyPetItem.setItemMeta(meta);
 
                         player.getInventory().addItem(keyPetItem);
-                        player.sendMessage(ChatColor.WHITE + "Вы получили " + ChatColor.AQUA + "Ключ от Ящика с Питомцами");
+                        player.sendMessage("§fВы получили §bКлюч от Ящика с Питомцами");
                         break;
                     }
                     case 2: {

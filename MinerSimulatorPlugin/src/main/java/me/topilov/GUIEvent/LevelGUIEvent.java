@@ -1,5 +1,8 @@
 package me.topilov.GUIEvent;
 
+import me.topilov.App;
+import me.topilov.sql.SQLGetter;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,6 +12,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class LevelGUIEvent implements Listener {
+
+    SQLGetter data = App.getInstance().data;
 
     @Deprecated
     @EventHandler
@@ -21,7 +26,7 @@ public class LevelGUIEvent implements Listener {
             if (clicked == null) return;
             if (clicked.getType() == Material.EXPERIENCE_BOTTLE) {
                 player.chat("/level up");
-                player.closeInventory();
+                player.chat("/level");
             }
         }
     }

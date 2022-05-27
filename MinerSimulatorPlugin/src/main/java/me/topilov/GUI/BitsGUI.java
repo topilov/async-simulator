@@ -12,12 +12,17 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BitsGUI implements CommandExecutor {
+
+    public ItemStack money = new ItemStack(Material.EMERALD);
+    public ItemStack exp = new ItemStack(Material.EXPERIENCE_BOTTLE);
+    public ItemStack blocks = new ItemStack(Material.GRASS_BLOCK);
+    public ItemStack artefacts = new ItemStack(Material.GOLD_NUGGET);
+    public Inventory bits = Bukkit.getServer().createInventory(null, 9, "Магазин за Битсы");
 
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
@@ -26,26 +31,41 @@ public class BitsGUI implements CommandExecutor {
                 sender.sendMessage(ChatColor.DARK_RED + "В консоли нельзя использовать эту команду");
                 return true;
             }
-
             Player player = (Player) sender;
 
-            Inventory bits = Bukkit.getServer().createInventory(null, 9, "Магазин за Битсы");
+            setItems();
+            player.openInventory(bits);
+
+        }
+        return true;
+    }
 
 
-            ItemStack money = new ItemStack(Material.EMERALD);
+
+
+
+
+
+
+
+
+
+
+
+
+    void setItems() {
+        setItem("LocalMoneyBooster");
+        setItem("LocalExpBooster");
+        setItem("LocalBlocksBooster");
+        setItem("LocalArtefactsBooster");
+        setItem("GlobalMoneyBooster");
+        setItem("GlobalExpBooster");
+        setItem("GlobalBlocksBooster");
+        setItem("GlobalArtefactsBooster");
+    }
+    void setItem(String index) {
+        if (index.equalsIgnoreCase("LocalMoneyBooster")) {
             ItemMeta meta_money = money.getItemMeta();
-
-            ItemStack exp = new ItemStack(Material.EXPERIENCE_BOTTLE);
-            ItemMeta meta_exp = exp.getItemMeta();
-
-            ItemStack blocks = new ItemStack(Material.GRASS_BLOCK);
-            ItemMeta meta_blocks = blocks.getItemMeta();
-
-            ItemStack artefacts = new ItemStack(Material.GOLD_NUGGET);
-            ItemMeta meta_artefacts = artefacts.getItemMeta();
-
-
-            //LOCAL MONEY BOOSTER
             meta_money.setDisplayName(ChatColor.GREEN + "Локальный бустер Денег");
             List<String> lore2 = new ArrayList<>();
             lore2.add("");
@@ -56,8 +76,10 @@ public class BitsGUI implements CommandExecutor {
             meta_money.setLore(lore2);
             money.setItemMeta(meta_money);
             bits.setItem(0, money);
+        }
 
-            //LOCAL EXP BOOSTER
+        if (index.equalsIgnoreCase("LocalExpBooster")) {
+            ItemMeta meta_exp = exp.getItemMeta();
             meta_exp.setDisplayName(ChatColor.AQUA + "Локальный бустер Опыта");
             List<String> lore = new ArrayList<>();
             lore.add("");
@@ -68,8 +90,10 @@ public class BitsGUI implements CommandExecutor {
             meta_exp.setLore(lore);
             exp.setItemMeta(meta_exp);
             bits.setItem(1, exp);
+        }
 
-            //LOCAL BLOCKS BOOSTER
+        if (index.equalsIgnoreCase("LocalBlocksBooster")) {
+            ItemMeta meta_blocks = blocks.getItemMeta();
             meta_blocks.setDisplayName(ChatColor.YELLOW + "Локальный бустер Блоков");
             List<String> lore3 = new ArrayList<>();
             lore3.add("");
@@ -80,8 +104,10 @@ public class BitsGUI implements CommandExecutor {
             meta_blocks.setLore(lore3);
             blocks.setItemMeta(meta_blocks);
             bits.setItem(2, blocks);
+        }
 
-            //LOCAL ARTEFACTS BOOSTER
+        if (index.equalsIgnoreCase("LocalArtefactsBooster")) {
+            ItemMeta meta_artefacts = artefacts.getItemMeta();
             meta_artefacts.setDisplayName(ChatColor.GOLD + "Локальный бустер Артефактов");
             List<String> lore4 = new ArrayList<>();
             lore4.add("");
@@ -92,12 +118,10 @@ public class BitsGUI implements CommandExecutor {
             meta_artefacts.setLore(lore4);
             artefacts.setItemMeta(meta_artefacts);
             bits.setItem(3, artefacts);
+        }
 
-            player.openInventory(bits);
-
-
-
-            //GLOBAL MONEY BOOSTER
+        if (index.equalsIgnoreCase("GlobalMoneyBooster")) {
+            ItemMeta meta_money = money.getItemMeta();
             meta_money.setDisplayName(ChatColor.GREEN + "Глобальный бустер Денег");
             meta_money.addEnchant(Enchantment.WATER_WORKER, 1, true);
             meta_money.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -110,8 +134,10 @@ public class BitsGUI implements CommandExecutor {
             meta_money.setLore(lore5);
             money.setItemMeta(meta_money);
             bits.setItem(5, money);
+        }
 
-            //GLOBAL EXP BOOSTER
+        if (index.equalsIgnoreCase("GlobalExpBooster")) {
+            ItemMeta meta_exp = exp.getItemMeta();
             meta_exp.setDisplayName(ChatColor.AQUA + "Глобальный бустер Опыта");
             meta_exp.addEnchant(Enchantment.WATER_WORKER, 1, true);
             meta_exp.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -124,8 +150,10 @@ public class BitsGUI implements CommandExecutor {
             meta_exp.setLore(lore6);
             exp.setItemMeta(meta_exp);
             bits.setItem(6, exp);
+        }
 
-            //GLOBAL BLOCKS BOOSTER
+        if (index.equalsIgnoreCase("GlobalBlocksBooster")) {
+            ItemMeta meta_blocks = blocks.getItemMeta();
             meta_blocks.setDisplayName(ChatColor.YELLOW + "Глобальный бустер Блоков");
             meta_blocks.addEnchant(Enchantment.WATER_WORKER, 1, true);
             meta_blocks.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -138,8 +166,10 @@ public class BitsGUI implements CommandExecutor {
             meta_blocks.setLore(lore7);
             blocks.setItemMeta(meta_blocks);
             bits.setItem(7, blocks);
+        }
 
-            //GLOBAL ARTEFACTS BOOSTER
+        if (index.equalsIgnoreCase("GlobalArtefactsBooster")) {
+            ItemMeta meta_artefacts = artefacts.getItemMeta();
             meta_artefacts.setDisplayName(ChatColor.GOLD + "Глобальный бустер Артефактов");
             meta_artefacts.addEnchant(Enchantment.WATER_WORKER, 1, true);
             meta_artefacts.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -152,10 +182,6 @@ public class BitsGUI implements CommandExecutor {
             meta_artefacts.setLore(lore8);
             artefacts.setItemMeta(meta_artefacts);
             bits.setItem(8, artefacts);
-
-            player.openInventory(bits);
-
         }
-        return true;
     }
 }

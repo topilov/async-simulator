@@ -14,6 +14,11 @@ public class BoosterMethods {
         int globalBoosterBlocks = data.getGlobalBoosterBlocks(App.getInstance().getName());
         int globalBoosterArtefacts = data.getGlobalBoosterArtefacts(App.getInstance().getName());
 
+        data.setGlobalBoosterBalance(App.getInstance().getName(), 0);
+        data.setGlobalBoosterEXP(App.getInstance().getName(), 0);
+        data.setGlobalBoosterBlocks(App.getInstance().getName(), 0);
+        data.setGlobalBoosterArtefacts(App.getInstance().getName(), 0);
+
         Bukkit.getOnlinePlayers().forEach(onlinePlayers -> {
             int localBoosterBalance = data.getLocalBoosterBalance(onlinePlayers.getUniqueId());
             int localBoosterEXP = data.getLocalBoosterEXP(onlinePlayers.getUniqueId());
@@ -37,13 +42,6 @@ public class BoosterMethods {
             data.removeBoosterBlocks(onlinePlayers.getUniqueId(), globalBoosterBlocks);
             data.removeBoosterArtefacts(onlinePlayers.getUniqueId(), globalBoosterArtefacts);
         });
-        data.setGlobalBoosterBalance(App.getInstance().getName(), 0);
-        data.setGlobalBoosterEXP(App.getInstance().getName(), 0);
-        data.setGlobalBoosterBlocks(App.getInstance().getName(), 0);
-        data.setGlobalBoosterArtefacts(App.getInstance().getName(), 0);
 
     }
-
-
-
 }
